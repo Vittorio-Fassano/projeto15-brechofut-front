@@ -170,5 +170,6 @@ const ContainerInputs = styled.div`
         font-family: 'Patrick Hand', cursive;
         font-weight: 700; 
         letter-spacing: 3px;
+        cursor: pointer;
     }
 `
