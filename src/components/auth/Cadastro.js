@@ -1,33 +1,67 @@
 import styled from "styled-components"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+
 
 export function Cadastro() {
+    const navigate = useNavigate();
 
+    const [infosCadastro, setInfosCadastro] = useState({  name: "", email: "", password: "", confirmedPassword: "", });
+
+    const modelCadastro = {
+        name: infosCadastro.name,
+        email: infosCadastro.email,
+        password: infosCadastro.password,
+        confirmedPassword: infosCadastro.confirmedPassword
+    }
+
+    const URLcadastro = 'https://brechofut.onrender.com/sign-up';
+
+    function Cadastro(e) {
+        e.preventDefault();
+        const promise = axios.post(URLcadastro, modelCadastro);
+
+        promise.then((response) => {
+            setInfosCadastro(response.data);
+            navigate('/');
+        });
+
+        promise.catch(error => {
+            console.log(error);
+            alert("error signup");
+        });
+    }
 
 
     //inputs
-    function inputs() {
+    const imprimirInputs = Inputs();
+    function Inputs() {
         //
         return (
-                <form>
+                <form onSubmit={Cadastro}>
                     <input
                         type='text'
                         placeholder='usuário'
+                        onChange={e => setInfosCadastro({ ...infosCadastro, name: e.target.value })}
                         
                     />
                     <input
                         type='text'
                         placeholder='email'
+                        onChange={e => setInfosCadastro({ ...infosCadastro, email: e.target.value })}
                         
                     />
                     <input
                         type='password'
                         placeholder='senha'
+                        onChange={e => setInfosCadastro({ ...infosCadastro, password: e.target.value })}
                         
                     />
                     <input
                         type='password'
                         placeholder='confirmar senha'
+                        onChange={e => setInfosCadastro({ ...infosCadastro, confirmedPassword: e.target.value })}
                         
                     />
                     <button type='submit'>cadastrar</button>
@@ -40,7 +74,7 @@ export function Cadastro() {
         <ContainerCadastro>
             <h1>brechoFut</h1>
             <ContainerInputs>
-                {inputs()}
+                {imprimirInputs}
             </ContainerInputs>
             <Link to="/"  style={{ textDecoration: 'none'}}>
                 <p>Já tem uma conta? Entre agora!</p>
@@ -65,7 +99,7 @@ const ContainerCadastro = styled.div`
         color: #f04158;
         font-family: 'Titan One', cursive; 
         font-size:60px;
-        margin-top:50px;
+        margin-top:70px;
         margin-bottom:24px;
         text-align:center;
         line-height: 50px;

@@ -1,23 +1,62 @@
 import styled from "styled-components"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
+import { useContext, useState } from 'react';
+import axios from 'axios';
+import UserContext from "../../contexts/UserContext";
 
 export function Entrar() {
+    const { setUserInformations, setUserName} = useContext(UserContext);//get a state through the context
+    const [infosEntrar, setInfosEntrar] = useState({ email: '', password: '' });
+    const navigate = useNavigate();
 
+    const modelEntrar = {
+        email: infosEntrar.email,
+        password: infosEntrar.password
+    }
+
+    const URLlogin = "https://brechofut.onrender.com" //back deploy link
+
+    function newLogin(e) {
+        e.preventDefault();
+
+        const promise = axios.post(URLlogin, modelEntrar)
+        promise.then((response) => {
+            setUserName(response.data.name);
+
+            setUserInformations(response.data.token);
+
+            setInfosEntrar(response.data);
+            
+            const user = JSON.stringify(response.data.token);
+            localStorage.setItem('token', user)
+
+            const userName = JSON.stringify(response.data.name);
+            localStorage.setItem('name', userName)
+
+
+            navigate("/fazer-anuncio");
+        })
+        promise.catch(err => {
+            console.log(err);
+            alert("error login");
+        })
+    }
 
 
     //inputs
     function inputs() {
-        //
         return (
-                <form>
+                <form onSubmit={newLogin}>
                     <input
                         type='text'
                         placeholder='usuário'
+                        onChange={e => setInfosEntrar({ ...infosEntrar, email: e.target.value })}
                         
                     />
                     <input
-                        type='text'
+                        type='password'
                         placeholder='senha'
+                        onChange={e => setInfosEntrar({ ...infosEntrar, password: e.target.value })}
                         
                     />
                     <button type='submit'>entrar</button>
@@ -114,7 +153,7 @@ const ContainerInputs = styled.div`
         height:50px;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
-        margin-bottom:28px;
+        margin-bottom:35px;
         margin-left:65px;
         padding-left:15px;
         font-size: 20px;
