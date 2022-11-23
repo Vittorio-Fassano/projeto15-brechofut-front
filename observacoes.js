@@ -13,5 +13,5 @@
 
 06)link do deploy do vercel
 
-https://projeto15-brechofut-front.vercel.app/
+https://projeto15-brechofut-front.vercel.app
 */
