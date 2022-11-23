@@ -80,6 +80,7 @@ const ContainerCadastro = styled.div`
         margin-left: 10px;
         text-decoration: none;
         text-decoration-color: #8C11BE;
+        letter-spacing: 2px;
     }
 `
 
@@ -105,7 +106,7 @@ const ContainerInputs = styled.div`
         color:#fcfcd7;
         font-family: 'Patrick Hand', cursive;
         font-weight: 700;
-
+        letter-spacing: 3px;
     }
 
     input::placeholder {
@@ -115,6 +116,7 @@ const ContainerInputs = styled.div`
         font-family: 'Patrick Hand', cursive;
         border: none;
         color:#fcfcd7;
+        letter-spacing: 3px;
     }
 
     button {
@@ -133,5 +135,6 @@ const ContainerInputs = styled.div`
         color:#fcfcd7;
         font-family: 'Patrick Hand', cursive;
         font-weight: 700; 
+        letter-spacing: 3px;
     }
 `

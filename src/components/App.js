@@ -4,7 +4,8 @@ import { useState, userContext, useEffect} from 'react';
 import UserContext from '../contexts/UserContext';
 import GlobalStyle from '../style/GlobalStyle';
 import { Cadastro } from './auth/Cadastro';
-//import SignIn  from './ApplicationAccess/Sign-Up'; //register
+import { Entrar } from './auth/Entrar';
+
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
                     <UserContext.Provider value={contextValue}>
                         <BrowserRouter>
                             <Routes>
-                                
+                                <Route path='/' element={<Entrar />}/>
                                 <Route path='/cadastro' element={<Cadastro />}/>
                                 
                             </Routes>
