@@ -8,4 +8,10 @@
 03)as fontes utilizadas estao no index.html na pasta public e tambem escrita no global style na pasta style
 
 04) layout esta feioso basicao mas já é uma base para comecar
+
+05)telas de cadastro e entrar feitas e funcionando
+
+06)link do deploy do vercel
+
+https://projeto15-brechofut-front.vercel.app/
 */
