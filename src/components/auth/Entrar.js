@@ -49,7 +49,7 @@ export function Entrar() {
                 <form onSubmit={newLogin}>
                     <input
                         type='text'
-                        placeholder='usuário'
+                        placeholder='email'
                         onChange={e => setInfosEntrar({ ...infosEntrar, email: e.target.value })}
                         
                     />
