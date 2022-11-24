@@ -5,6 +5,13 @@
 02)estou usando a paleta de cores desse site que gera algumas, aqui em baixo esta o link:
     https://paletadecores.com/likes/
 
+    paleta de cores utilizadas por numeracao, se facilitar:
+    #67be9b
+    #95d0b8
+    #fcfcd7
+    #f1db42
+    #f04158
+
 03)as fontes utilizadas estao no index.html na pasta public e tambem escrita no global style na pasta style
 
 04) layout esta feioso basicao mas já é uma base para comecar

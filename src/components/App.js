@@ -1,18 +1,18 @@
 import {Route, Routes, BrowserRouter} from 'react-router-dom';
-import { useState, userContext, useEffect} from 'react';
-
+import { useState, /*userContext,*/ useEffect} from 'react';
 import UserContext from '../contexts/UserContext';
 import GlobalStyle from '../style/GlobalStyle';
 import { Cadastro } from './auth/Cadastro';
 import { Entrar } from './auth/Entrar';
+import { NovoAnuncio } from './anuncios/novoAnuncio/novoAnuncio';
 
 
 
 function App() {
     const tokenStorage = JSON.parse(localStorage.getItem('token'));
-    const nameStorage = JSON.parse(localStorage.getItem('name'));
+    //const nameStorage = JSON.parse(localStorage.getItem('name'));
     const [userInformations, setUserInformations] = useState(tokenStorage); 
-    const [userName, setUserName] = useState(nameStorage);
+    //const [userName, setUserName] = useState(nameStorage);
 
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function App() {
         }
     }, []);
 
-    const contextValue = { userInformations, setUserInformations, userName, setUserName};
+    const contextValue = { userInformations, setUserInformations, /*userName, setUserName*/};
 
     return (
             <>
@@ -32,6 +32,7 @@ function App() {
                             <Routes>
                                 <Route path='/' element={<Entrar />}/>
                                 <Route path='/cadastro' element={<Cadastro />}/>
+                                <Route path='/fazer-anuncio' element={<NovoAnuncio />}/>
                                 
                             </Routes>
                         </BrowserRouter>
