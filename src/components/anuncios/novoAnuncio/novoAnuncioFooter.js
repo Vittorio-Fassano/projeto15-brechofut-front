@@ -18,7 +18,7 @@ const ContainerFooter = styled.div`
     width: 100%;
     margin-top: 13px;
     height: 80px;
-    width: 375px;
+    width: 100vw;
     position: absolute;
     bottom: 0;
     background-color: #fcfcd7;
