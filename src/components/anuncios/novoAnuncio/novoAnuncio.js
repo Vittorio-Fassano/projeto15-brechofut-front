@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import {useNavigate } from 'react-router-dom'
 import UserContext from "../../../contexts/UserContext";
+import FooterNovoAnuncio from './novoAnuncioFooter';
 
 export function NovoAnuncio () {
     const [novoAnuncio, setNovoAnuncio] = useState({  value: "", description: "", image: "" });
@@ -22,8 +23,6 @@ export function NovoAnuncio () {
         const headers = { //token
             headers: { Authorization: `Bearer ${userInformations}` }
         };
-
-        console.log("token", userInformations)
      
         const URLnovaanuncio= "https://brechofut.onrender.com/fazer-anuncio"
 
@@ -74,19 +73,20 @@ export function NovoAnuncio () {
             <ContainerInputs>
                 {imprimirInputs}
             </ContainerInputs>
+            <FooterNovoAnuncio />
         </ContainerCadastro>
     )
 }
 
 //styled components
 const ContainerCadastro = styled.div`
-
     width: 375px;
     margin: auto auto;
     display:flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top:50px;
 
     h1 {
         color: #f04158;
@@ -115,14 +115,14 @@ const ContainerCadastro = styled.div`
 //layout inputs
 const ContainerInputs = styled.div`
     align-items: center;
-    margin-top: 30px;
+    margin-top:25px;
 
  input{
         width:250px;
-        height:50px;
+        height:100px;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
-        margin-bottom:28px;
+        margin-bottom:20px;
         margin-left:65px;
         padding-left:15px;
         font-size: 20px;
@@ -163,6 +163,7 @@ const ContainerInputs = styled.div`
         font-family: 'Patrick Hand', cursive;
         font-weight: 700; 
         letter-spacing: 3px;
+        margin-top:38px;
         cursor: pointer;
     }
 `
