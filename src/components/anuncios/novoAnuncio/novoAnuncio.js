@@ -170,12 +170,3 @@ const ContainerInputs = styled.div`
         cursor: pointer;
     }
 `
-
-//
-
-
-    //token
-    /*const headers = { 
-        headers: { Authorization: `Bearer ${userInformations}` }
-    };*/
-    //

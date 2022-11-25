@@ -5,7 +5,9 @@ import GlobalStyle from '../style/GlobalStyle';
 import { Cadastro } from './auth/Cadastro';
 import { Entrar } from './auth/Entrar';
 import { NovoAnuncio } from './anuncios/novoAnuncio/novoAnuncio';
-
+import { Home } from './anuncios/home';
+import { MeusAnuncios } from './anuncios/meusAnuncios';
+import {Carrinho} from './carrinho';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
                                 <Route path='/' element={<Entrar />}/>
                                 <Route path='/cadastro' element={<Cadastro />}/>
                                 <Route path='/fazer-anuncio' element={<NovoAnuncio />}/>
+                                <Route path='/home' element={<Home />}/>
+                                <Route path='/meus-anuncios' element={<MeusAnuncios />}/>
+                                <Route path='/carrinho' element={<Carrinho />}/>
                                 
                             </Routes>
                         </BrowserRouter>

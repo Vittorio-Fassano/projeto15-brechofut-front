@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function HeaderNovoAnuncio() {
+export default function HomeHeader() {
     return (
-        <ContainerHeader>
-                <Link to="/home" style={{ textDecoration: 'none' }}>
-                    <h4>home</h4>
+        <ContainerFooter>
+                <Link to="/fazer-anuncio" style={{ textDecoration: 'none' }}>
+                    <h4>fazer anúncio</h4>
                 </Link>
                 <Link to="/" style={{ textDecoration: 'none' }}>
                     <ion-icon name="log-out-outline"></ion-icon>
                 </Link>
-        </ContainerHeader>
+        </ContainerFooter>
     )
 }
 
-const ContainerHeader = styled.div`
+const ContainerFooter = styled.div`
     justify-content: space-between;
     display: flex;
     width: 100%;
@@ -33,8 +33,8 @@ const ContainerHeader = styled.div`
         font-size: 19px;
         line-height: 20px;
         text-decoration: none;
-        margin-left: 90px;
-        letter-spacing: 4px;
+        margin-left: 75px;
+        letter-spacing: 2px;
         
     }
 
