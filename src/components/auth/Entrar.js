@@ -10,8 +10,8 @@ export function Entrar() {
     const navigate = useNavigate();
 
     const modelEntrar = {
-        email: infosEntrar.email,
-        password: infosEntrar.password
+        email: (infosEntrar.email || "").toLowerCase(),
+        password: infosEntrar.password,
     }
 
     const URLlogin = "https://brechofut.onrender.com" //back deploy link

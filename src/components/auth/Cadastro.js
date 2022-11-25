@@ -10,8 +10,8 @@ export function Cadastro() {
     const [infosCadastro, setInfosCadastro] = useState({  name: "", email: "", password: "", confirmedPassword: "", });
 
     const modelCadastro = {
-        name: infosCadastro.name,
-        email: infosCadastro.email,
+        name: (infosCadastro.name || "").toLowerCase(),
+        email: (infosCadastro.email || "").toLowerCase(),
         password: infosCadastro.password,
         confirmedPassword: infosCadastro.confirmedPassword
     }
@@ -20,6 +20,7 @@ export function Cadastro() {
 
     function Cadastro(e) {
         e.preventDefault();
+        console.log(modelCadastro);
         const promise = axios.post(URLcadastro, modelCadastro);
 
         promise.then((response) => {
