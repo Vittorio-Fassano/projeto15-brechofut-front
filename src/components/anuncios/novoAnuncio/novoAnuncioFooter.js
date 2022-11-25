@@ -5,7 +5,7 @@ export default function FooterNovoAnuncio() {
     return (
         <ContainerFooter>
                 <Link to="/meus-anuncios" style={{ textDecoration: 'none' }}>
-                    <p>meus anúncios</p>
+                    <h4>meus anúncios</h4>
                 </Link>
                 <Link to="/carrinho" style={{ textDecoration: 'none' }}>
                     <ion-icon name="cart-outline"></ion-icon>
@@ -26,21 +26,22 @@ const ContainerFooter = styled.div`
     text-align: center;
     
    
-    p {
+    h4 {
         color: #f04158;
         font-family: 'Titan One', cursive;
         font-weight: 100;
-        font-size: 15px;
+        font-size: 14px;
         line-height: 20px;
         text-decoration: none;
-        margin-left: 80px;
+        margin-left: 90px;
+        letter-spacing: 2px;
         
         
     }
 
     ion-icon {
         margin-right:70px;
-        font-size:26px;
+        font-size:22px;
         color:#f04158;
         cursor:pointer;
     }

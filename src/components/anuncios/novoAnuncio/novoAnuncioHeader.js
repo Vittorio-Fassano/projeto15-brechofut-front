@@ -5,7 +5,7 @@ export default function HeaderNovoAnuncio() {
     return (
         <ContainerFooter>
                 <Link to="/home" style={{ textDecoration: 'none' }}>
-                    <p>home</p>
+                    <h4>home</h4>
                 </Link>
                 <Link to="/carrinho" style={{ textDecoration: 'none' }}>
                     <ion-icon name="log-out-outline"></ion-icon>
@@ -26,14 +26,15 @@ const ContainerFooter = styled.div`
     text-align: center;
     
     
-    p {
+    h4 {
         color: #f04158;
         font-family: 'Titan One', cursive;
         font-weight: 100;
-        font-size: 15px;
+        font-size: 19px;
         line-height: 20px;
         text-decoration: none;
-        margin-left: 80px;
+        margin-left: 90px;
+        letter-spacing: 4px;
         
     }
 
