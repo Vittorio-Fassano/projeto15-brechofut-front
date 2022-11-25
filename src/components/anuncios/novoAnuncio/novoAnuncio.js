@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useNavigate } from 'react-router-dom'
 import UserContext from "../../../contexts/UserContext";
 import FooterNovoAnuncio from './novoAnuncioFooter';
+import HeaderNovoAnuncio from './novoAnuncioHeader';
 
 export function NovoAnuncio () {
     const [novoAnuncio, setNovoAnuncio] = useState({  value: "", description: "", image: "" });
@@ -71,6 +72,7 @@ export function NovoAnuncio () {
 
     return (
         <ContainerCadastro>
+            <HeaderNovoAnuncio />
             <ContainerInputs>
                 {imprimirInputs}
             </ContainerInputs>
@@ -116,7 +118,8 @@ const ContainerCadastro = styled.div`
 //layout inputs
 const ContainerInputs = styled.div`
     align-items: center;
-    margin-top:25px;
+    margin-top:60px;
+    position: relative;
 
  input{
         width:250px;
@@ -152,7 +155,6 @@ const ContainerInputs = styled.div`
         height:50px;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
-        margin-bottom:28px;
         margin-left:65px;
         padding-left:15px;
         font-size: 20px;

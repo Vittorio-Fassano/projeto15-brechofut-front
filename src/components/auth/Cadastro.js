@@ -108,7 +108,7 @@ const ContainerCadastro = styled.div`
 
     p {
         font-size:15px;
-        font-weight:700;
+        font-weight:450;
         color: #fcfcd7;
         display:flex;
         justify-content:center;
