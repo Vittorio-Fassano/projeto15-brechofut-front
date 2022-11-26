@@ -54,6 +54,9 @@ function TodosAnuncios(props) {
             <p>{info.description}</p>
             <h2 >{info.value} R$</h2>
             <h3 >{info.user}</h3>
+            <button>
+                <ion-icon name="cart-outline"></ion-icon>
+            </button>
         </ContainerAnuncios>
     );
 }
@@ -65,16 +68,29 @@ const ContainerMain = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 70px;
-    margin-bottom: 85px;
+    margin-top: 65px;
+    margin-bottom: 80px;
 `;
 
 const ContainerAnuncios = styled.div`
     background-color: #67be9b;
     align-items: center;
     justify-content: center;
-    align-items: center;
     margin-top: 20px;
+
+    button {
+        height: 20px;
+        width: 30px;
+        border: none;
+        background-color: #95d0b8;
+        color: #f04158;
+        margin-left: 95px;
+        margin-bottom:17px;
+    }
+    ion-icon {
+        color: #f04158;
+        font-size: 20px;
+    }
  
     p {
     font-size: 17px;
@@ -82,6 +98,7 @@ const ContainerAnuncios = styled.div`
     font-family: 'Patrick Hand', cursive;
     margin-bottom: 2px;
     letter-spacing: 1px;
+    margin-left: 15px;
     }
 
     h2 {
@@ -106,13 +123,14 @@ const ContainerImagem = styled.div`
     background-color: #67be9b;
     align-items: center;
     justify-content: center;
-    align-items: center;
+    display: column;
     margin-bottom: 3px;
-    margin-left:17px;
+    margin-left:30px;
+    
 
     img {
-        width: 170px;
-        height:170px;
+        width: 165px;
+        height:165px;
         border-radius: 25px;
         border-style: solid;
         border-color: #f04158;
