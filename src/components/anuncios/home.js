@@ -55,7 +55,7 @@ function TodosAnuncios(props) {
             <h2 >{info.value} R$</h2>
             <h3 >{info.user}</h3>
             <button>
-                <ion-icon name="cart-outline"></ion-icon>
+                <h5>add</h5>
             </button>
         </ContainerAnuncios>
     );
@@ -86,12 +86,14 @@ const ContainerAnuncios = styled.div`
         color: #f04158;
         margin-left: 95px;
         margin-bottom:17px;
+
+        h5 {
+            color: #f04158;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 15px;
+        }
     }
-    ion-icon {
-        color: #f04158;
-        font-size: 20px;
-    }
- 
+    
     p {
     font-size: 17px;
     color: #fcfcd7;
