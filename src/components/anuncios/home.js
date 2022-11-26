@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import UserContext from "../../contexts/UserContext";
 import FooterNovoAnuncio from '../anuncios/novoAnuncio/novoAnuncioFooter';
 import Header from '../Header';
 
 export function Home() {
     const [anuncios, setAnuncios] = useState([]);
-    const { userInformations} = useContext(UserContext);
+    const { userInformations } = useContext(UserContext);
 
     useEffect(() => {
         const config = {
@@ -44,7 +44,30 @@ export function Home() {
 }
 
 function TodosAnuncios(props) {
-    const { info } = props
+    const { info } = props;
+    const { userInformations } = useContext(UserContext);
+
+    function adicionarCarrinho(callback) {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInformations}`
+            }
+        }
+        console.log(callback);
+        
+        const URLcarrinho = `https://brechofut.onrender.com/carrinho/${callback}`;
+
+        const promise = axios.post(URLcarrinho, {}, config );
+        promise.then((response) => {
+            alert("adicionado no carrinho");
+
+        });
+        promise.catch(error => {
+            console.log(error);
+            alert("erro ao adicionar no carrinho", error);
+        });
+    }
 
     return (
         <ContainerAnuncios>
@@ -55,17 +78,13 @@ function TodosAnuncios(props) {
             <h2 >{info.value} R$</h2>
             <h3 >{info.user}</h3>
             <button>
-                <h5 onClick={adicionarCarrinho}>add</h5>
+                <h5 onClick={() => adicionarCarrinho(info._id)}>add</h5>
             </button>
         </ContainerAnuncios>
     );
 }
 
-function adicionarCarrinho() {
-        
 
-    
-}
 
 
 

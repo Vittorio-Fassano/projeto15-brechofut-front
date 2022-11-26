@@ -73,8 +73,8 @@ const ContainerMain = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 62px;
-    margin-bottom: 85px;
+    margin-top: 65px;
+    margin-bottom: 95px;
 
     p {
     font-size: 17px;
@@ -91,6 +91,7 @@ const ContainerAnuncios = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 25px;
+    margin-bottom: 25px;
 
     button {
         height: 15px;

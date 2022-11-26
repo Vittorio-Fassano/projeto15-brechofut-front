@@ -6,22 +6,9 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
 export default function Header() {
-    const [header, setHeader] = useState(true);
+    const [header, setHeader] = useState("");
     const { setUserInformations } = useContext(UserContext);
     const navigate = useNavigate();
-    const handleClickFalse = () => {
-
-        console.log("entrei1")
-        setHeader(false);
-        navigate("/fazer-anuncio");
-    }
-    const handleClickTrue = () => {
-
-        console.log("entrei2")
-        setHeader(true);
-        navigate("/home");
-    }
-    console.log(header);
 
     function logOut() {
         window.localStorage.removeItem('token');
@@ -30,16 +17,40 @@ export default function Header() {
         navigate("/");
     }
 
+    console.log(header);
+
+    /*function navigation1() {
+        setTimeout(
+            () => navigate("/fazer-anuncio"), 600
+        )
+    };
+
+    function navigation2() {
+        setTimeout(
+            () => navigate("/home"), 600
+        )
+    };*/
+    const handleClickFalse = () => {
+
+        console.log("entrei1")
+        navigate("/fazer-anuncio");
+    }
+    const handleClickTrue = () => {
+
+        console.log("entrei2")
+        navigate("/home");
+    }
+
     return (
         <ContainerHeader>
             {
-                header ?
+                header === "" ?
 
-                    <div onClick={handleClickFalse} style={{ textDecoration: 'none' }}>
+                    <div onClick={() => {setHeader("false"); handleClickFalse() }} style={{ textDecoration: 'none' }}>
                         <h4>fazer anúncio</h4>
                     </div>
                     :
-                    <div onClick={handleClickTrue} style={{ textDecoration: 'none' }}>
+                    <div onClick={() => {setHeader(""); handleClickTrue() }} style={{ textDecoration: 'none' }}>
                         <h4>home</h4>
                     </div>
             }
