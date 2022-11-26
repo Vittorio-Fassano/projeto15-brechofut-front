@@ -1,25 +1,34 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 export default function Header() {
     const [header, setHeader] = useState(true);
+    const { setUserInformations } = useContext(UserContext);
     const navigate = useNavigate();
     const handleClickFalse = () => {
-       
+
         console.log("entrei1")
         setHeader(false);
         navigate("/fazer-anuncio");
     }
     const handleClickTrue = () => {
-       
+
         console.log("entrei2")
         setHeader(true);
         navigate("/home");
     }
     console.log(header);
+
+    function logOut() {
+        window.localStorage.removeItem('token');
+        window.localStorage.clear('token');
+        setUserInformations(null);
+        navigate("/");
+    }
 
     return (
         <ContainerHeader>
@@ -36,11 +45,13 @@ export default function Header() {
             }
 
             <Link to="/" style={{ textDecoration: 'none' }}>
-                <ion-icon name="log-out-outline"></ion-icon>
+                <ion-icon name="log-out-outline" onClick={() => logOut()}></ion-icon>
             </Link>
         </ContainerHeader>
     )
 }
+
+
 
 const ContainerHeader = styled.div`
     justify-content: space-between;

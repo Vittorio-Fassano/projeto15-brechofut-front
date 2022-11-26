@@ -24,7 +24,7 @@ function App() {
         }
     }, []);
 
-    const contextValue = { userInformations, setUserInformations, /*userName, setUserName*/};
+    const contextValue = { userInformations, setUserInformations};
 
     return (
             <>
