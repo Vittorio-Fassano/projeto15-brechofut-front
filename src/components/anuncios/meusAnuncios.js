@@ -135,7 +135,7 @@ const ContainerImagem = styled.div`
         height:170px;
         border-radius: 25px;
         border-style: solid;
-        border-color: #f04158;
+        border-color: #f1db42;
         border-width: 3px;
         box-shadow: 2px 2px 2px 2px #95d0b8;
     }
