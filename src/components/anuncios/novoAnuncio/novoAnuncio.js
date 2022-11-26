@@ -4,7 +4,7 @@ import axios from 'axios';
 import {useNavigate } from 'react-router-dom'
 import UserContext from "../../../contexts/UserContext";
 import FooterNovoAnuncio from './novoAnuncioFooter';
-import HeaderNovoAnuncio from './novoAnuncioHeader';
+import Header from '../../Header';
 
 export function NovoAnuncio () {
     const [novoAnuncio, setNovoAnuncio] = useState({  value: "", description: "", image: "" });
@@ -47,7 +47,6 @@ export function NovoAnuncio () {
                 <form onSubmit={Entry}>
                     <input
                         type='number'
-                        step="0.01"
                         placeholder='valor'
                         onChange={e => setNovoAnuncio({ ...novoAnuncio, value: e.target.value })}
                         
@@ -72,7 +71,7 @@ export function NovoAnuncio () {
 
     return (
         <ContainerCadastro>
-            <HeaderNovoAnuncio />
+            <Header />
             <ContainerInputs>
                 {imprimirInputs}
             </ContainerInputs>
