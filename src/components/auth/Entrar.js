@@ -32,7 +32,7 @@ export function Entrar() {
             localStorage.setItem('name', userName)
 
 
-            navigate("/fazer-anuncio");
+            navigate("/home");
         })
         promise.catch(err => {
             console.log(err);
