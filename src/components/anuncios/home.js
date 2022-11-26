@@ -29,6 +29,7 @@ export function Home() {
         });
     }, []);
 
+
     return (
         <>
             <Header />
@@ -43,7 +44,6 @@ export function Home() {
 }
 
 function TodosAnuncios(props) {
-
     const { info } = props
 
     return (
@@ -55,11 +55,19 @@ function TodosAnuncios(props) {
             <h2 >{info.value} R$</h2>
             <h3 >{info.user}</h3>
             <button>
-                <h5>add</h5>
+                <h5 onClick={adicionarCarrinho}>add</h5>
             </button>
         </ContainerAnuncios>
     );
 }
+
+function adicionarCarrinho() {
+        
+
+    
+}
+
+
 
 
 const ContainerMain = styled.div`
@@ -84,9 +92,10 @@ const ContainerAnuncios = styled.div`
         border: none;
         background-color: #95d0b8;
         color: #f04158;
-        margin-left: 95px;
+        margin-left: 98px;
         margin-bottom:17px;
         margin-top: 3px;
+        cursor: pointer;
 
         h5 {
             color: #f04158;

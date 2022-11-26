@@ -32,12 +32,21 @@ export function MeusAnuncios() {
         <>
             < Header/>
             <ContainerMain>
-                {meusAnuncios.map(anuncio => <TodosMeusAnuncios info={anuncio} key={MeusAnuncios.id} />).reverse()}
+                {
+                meusAnuncios.length > 0 ?
+                <>
+                    {meusAnuncios.map(anuncio => <TodosMeusAnuncios info={anuncio} key={MeusAnuncios.id} />).reverse()}
+                </>
+                :
+                <>
+                    <p>Você ainda não fez nenhum anúncio!</p>
+                </>
+                }       
             </ContainerMain>
             <NovoAnuncioFooter/>
         </>
     )
-}
+} //ternario nao esta funcionando mas quando tem algum anuncio feito ele imprime
 
 function TodosMeusAnuncios(props) {
 
@@ -66,6 +75,14 @@ const ContainerMain = styled.div`
     flex-direction: column;
     margin-top: 62px;
     margin-bottom: 85px;
+
+    p {
+    font-size: 17px;
+    color: black;
+    font-family: 'Patrick Hand', cursive;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+    }
 `;
 
 const ContainerAnuncios = styled.div`
@@ -81,7 +98,8 @@ const ContainerAnuncios = styled.div`
         border: none;
         background-color: #95d0b8;
         color: #f04158;
-        margin-left: 95px;
+        margin-left: 93px;
+        cursor: pointer;
     }
  
     p {
@@ -96,7 +114,7 @@ const ContainerAnuncios = styled.div`
     font-size: 19px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive;
-    margin-left: 90px;
+    margin-left: 85px;
     margin-bottom: 1px;
     letter-spacing: 1px;
     }
