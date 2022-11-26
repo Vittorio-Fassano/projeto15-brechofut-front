@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import UserContext from "../../contexts/UserContext";
 import FooterNovoAnuncio from '../anuncios/novoAnuncio/novoAnuncioFooter';
 import Header from '../Header';
+import HeaderHome from '../HeaderHome';
 
 export function Home() {
     const [anuncios, setAnuncios] = useState([]);
@@ -32,7 +33,7 @@ export function Home() {
 
     return (
         <>
-            <Header />
+            <HeaderHome />
 
             <ContainerMain>
                 {anuncios.map(anuncio => <TodosAnuncios info={anuncio} key={anuncios.id} />).reverse()}

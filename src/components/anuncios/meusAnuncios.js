@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import UserContext from "../../contexts/UserContext";
 import NovoAnuncioFooter from './meusAnunciosFooter';
-import Header from '../Header';
+//import Header from '../Header';
+import Header2 from '../Header2';
 
 export function MeusAnuncios() {
     const [meusAnuncios, setMeusAnuncios] = useState([]);
@@ -30,7 +31,7 @@ export function MeusAnuncios() {
     }, []);
     return (
         <>
-            < Header/>
+            < Header2/>
             <ContainerMain>
                 {
                 meusAnuncios.length > 0 ?

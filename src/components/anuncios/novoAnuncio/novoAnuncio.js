@@ -4,7 +4,8 @@ import axios from 'axios';
 import {useNavigate } from 'react-router-dom'
 import UserContext from "../../../contexts/UserContext";
 import FooterNovoAnuncio from './novoAnuncioFooter';
-import Header from '../../Header';
+//import Header from '../../Header';
+import Header2 from '../../Header2';
 
 export function NovoAnuncio () {
     const [novoAnuncio, setNovoAnuncio] = useState({  value: "", description: "", image: "" });
@@ -71,7 +72,7 @@ export function NovoAnuncio () {
 
     return (
         <ContainerCadastro>
-            <Header />
+            <Header2 />
             <ContainerInputs>
                 {imprimirInputs}
             </ContainerInputs>

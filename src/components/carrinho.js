@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import UserContext from "../contexts/UserContext";
-import Header from './Header';
+//import Header from './Header';
+import Header2 from './Header2';
 
 export function Carrinho() {
     const [carrinho, setCarrinho] = useState([]);
     const { userInformations } = useContext(UserContext);
-    
 
     useEffect(() => {
         const config = {
@@ -27,16 +27,13 @@ export function Carrinho() {
         promise.catch(error => {
             console.log(error);
             alert("erro ao acessar carrinho");
-        });
-
-            
-            
+        });  
     }, []);
 
     
     return (
         <>
-            <Header />
+            <Header2/>
             <ContainerMain>
                 {carrinho.map(carrinhos => <TodosAnuncios info={carrinhos} key={carrinho.id} />).reverse()}
             </ContainerMain>
@@ -53,7 +50,6 @@ function TodosAnuncios(props) {
     const { userInformations } = useContext(UserContext);
 
     function adicionarCarrinho(callback) {
-
         const config = {
             headers: {
                 Authorization: `Bearer ${userInformations}`
