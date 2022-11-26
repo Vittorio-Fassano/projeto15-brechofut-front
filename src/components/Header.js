@@ -7,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 export default function Header() {
     const [header, setHeader] = useState(true);
     const navigate = useNavigate();
-    const handleClickFalse = (e) => {
-        e.preventDefault();
+    const handleClickFalse = () => {
+       
+        console.log("entrei1")
         setHeader(false);
         navigate("/fazer-anuncio");
     }
-    const handleClickTrue = (e) => {
-        e.preventDefault();
+    const handleClickTrue = () => {
+       
+        console.log("entrei2")
         setHeader(true);
         navigate("/home");
     }

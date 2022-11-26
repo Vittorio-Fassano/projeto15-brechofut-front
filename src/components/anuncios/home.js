@@ -85,7 +85,7 @@ const ContainerAnuncios = styled.div`
     }
 
     h2 {
-    font-size: 18px;
+    font-size: 19px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive;
     margin-left: 90px;
@@ -97,7 +97,7 @@ const ContainerAnuncios = styled.div`
     font-size: 17px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive; 
-    margin-left: 95px;
+    margin-left: 96px;
     letter-spacing: 1px;
     }
 `;
