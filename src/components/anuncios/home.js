@@ -86,6 +86,7 @@ const ContainerAnuncios = styled.div`
         color: #f04158;
         margin-left: 95px;
         margin-bottom:17px;
+        margin-top: 3px;
 
         h5 {
             color: #f04158;
@@ -127,7 +128,7 @@ const ContainerImagem = styled.div`
     justify-content: center;
     display: column;
     margin-bottom: 3px;
-    margin-left:30px;
+    margin-left:38px;
     
 
     img {
