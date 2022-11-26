@@ -50,6 +50,7 @@ function TodosMeusAnuncios(props) {
             </ContainerImagem>
             <p>{info.description}</p>
             <h2 >{info.value} R$</h2>
+            <button>X</button>
         </ContainerAnuncios>
     );
 }
@@ -63,7 +64,7 @@ const ContainerMain = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 70px;
+    margin-top: 62px;
     margin-bottom: 85px;
 `;
 
@@ -72,7 +73,16 @@ const ContainerAnuncios = styled.div`
     align-items: center;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 25px;
+
+    button {
+        height: 15px;
+        width: 30px;
+        border: none;
+        background-color: #95d0b8;
+        color: #f04158;
+        margin-left: 95px;
+    }
  
     p {
     font-size: 17px;
