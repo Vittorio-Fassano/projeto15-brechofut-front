@@ -57,7 +57,7 @@ function TodosAnuncios(props) {
     const URLcarrinho = `https://brechofut.onrender.com/carrinho/${callback}`;
 
     if (info.user === userName) {
-      return alert("Este produto ja é seu!");
+      return alert("Este produto já é seu!");
     }
 
     const promise = axios.post(URLcarrinho, {}, config);
