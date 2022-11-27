@@ -79,7 +79,7 @@ function TodosAnuncios(props) {
         <img src={info.image} alt="fotoProduto" />
       </ContainerImagem>
       <p>{info.description}</p>
-      <h2>{info.value} R$</h2>
+      <h2>R$ {info.value}</h2>
       <h3>{info.user}</h3>
       <button>
         <h5 onClick={() => adicionarCarrinho(info._id)}>add</h5>

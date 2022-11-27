@@ -85,7 +85,7 @@ function TodosMeusAnuncios(props) {
         <img src={info.image} alt="fotoProduto" />
       </ContainerImagem>
       <p>{info.description}</p>
-      <h2>{info.value} R$</h2>
+      <h2>R$ {info.value}</h2>
       <button onClick={() => removerProduto(info._id)}>X</button>
     </ContainerAnuncios>
   );
