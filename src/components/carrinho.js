@@ -8,15 +8,16 @@ import Header2 from './Header2';
 
 export function Carrinho() {
     const [carrinho, setCarrinho] = useState([]);
+    const [att, setAtt] = useState(false);
     const { userInformations } = useContext(UserContext);
 
-    useEffect(() => {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInformations}`
-            }
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInformations}`
         }
+    }
 
+    useEffect(() => {
         const URLcarrinho = "https://brechofut.onrender.com/carrinho";
 
         const promise = axios.get(URLcarrinho, config);
@@ -28,14 +29,15 @@ export function Carrinho() {
             console.log(error);
             alert("erro ao acessar carrinho");
         });  
-    }, []);
+    }, [att]);
 
+    
     
     return (
         <>
             <Header2/>
             <ContainerMain>
-                {carrinho.map(carrinhos => <TodosAnuncios info={carrinhos} key={carrinho.id} />).reverse()}
+                {carrinho.map(carrinhos => <TodosAnuncios info={carrinhos} key={carrinho.id} setAtt={setAtt} att={att} />).reverse()}
             </ContainerMain>
             <ContainerButton>
                 <button>finalizar compra</button>
@@ -46,28 +48,28 @@ export function Carrinho() {
 }
 
 function TodosAnuncios(props) {
-    const { info } = props;
+    const { info, att, setAtt } = props;
     const { userInformations } = useContext(UserContext);
 
-    function adicionarCarrinho(callback) {
+
+    function removerCarrinho(callback) {
         const config = {
             headers: {
                 Authorization: `Bearer ${userInformations}`
             }
-        }
-        console.log(callback);
+        };
 
-        const URLcarrinho = `https://brechofut.onrender.com/carrinho/${callback}`;
+        const URLdelete = `https://brechofut.onrender.com/carrinho/${callback}`;
 
-        const promise = axios.post(URLcarrinho, {}, config);
+        const promise = axios.delete(URLdelete, config);
         promise.then((response) => {
-            console.log("adicionado no carrinho", response)
-
+            setAtt(!att);
+            console.log("removido", response);
         });
         promise.catch(error => {
             console.log(error);
-            alert("erro ao adicionar no carrinho", error);
-        });
+            alert("erro ao remover produto");
+        });  
     }
 
     return (
@@ -78,7 +80,7 @@ function TodosAnuncios(props) {
             <p>{info.description}</p>
             <h2 >{info.value} R$</h2>
             <h3 >{info.user}</h3>
-            <button>X</button>
+            <button onClick={() => removerCarrinho(info._id)}>X</button>
         </ContainerAnuncios>
     );
 }

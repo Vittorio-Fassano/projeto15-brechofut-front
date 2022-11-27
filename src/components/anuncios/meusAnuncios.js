@@ -9,15 +9,16 @@ import Header2 from '../Header2';
 
 export function MeusAnuncios() {
     const [meusAnuncios, setMeusAnuncios] = useState([]);
+    const [att, setAtt] = useState(false);
     const { userInformations} = useContext(UserContext);
 
-    useEffect(() => {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInformations}`
-            }
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInformations}`
         }
+    }
 
+    useEffect(() => {
         const URLmeusanuncios = "https://brechofut.onrender.com/meus-anuncios";
 
         const promise = axios.get(URLmeusanuncios, config);
@@ -28,7 +29,7 @@ export function MeusAnuncios() {
             console.log(error);
             alert("erro ao acessar anuncios");
         });
-    }, []);
+    }, [att]);
     return (
         <>
             < Header2/>
@@ -36,7 +37,7 @@ export function MeusAnuncios() {
                 {
                 meusAnuncios.length > 0 ?
                 <>
-                    {meusAnuncios.map(anuncio => <TodosMeusAnuncios info={anuncio} key={MeusAnuncios.id} />).reverse()}
+                    {meusAnuncios.map(anuncio => <TodosMeusAnuncios info={anuncio} key={MeusAnuncios.id} setAtt={setAtt} att={att} />).reverse()}
                 </>
                 :
                 <>
@@ -50,8 +51,29 @@ export function MeusAnuncios() {
 } //ternario nao esta funcionando mas quando tem algum anuncio feito ele imprime
 
 function TodosMeusAnuncios(props) {
+    const { userInformations } = useContext(UserContext);
+    const { info, att, setAtt } = props
 
-    const { info } = props
+    function removerProduto(callback) {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInformations}`
+            }
+        };
+
+        const URLdelete = `https://brechofut.onrender.com/meus-anuncios/${callback}`;
+
+        const promise = axios.delete(URLdelete, config);
+        promise.then((response) => {
+            setAtt(!att);
+            console.log("removido", response);
+        });
+        promise.catch(error => {
+            console.log(error);
+            alert("erro ao remover produto");
+        });  
+    }
+
 
     return (
         <ContainerAnuncios>
@@ -60,7 +82,7 @@ function TodosMeusAnuncios(props) {
             </ContainerImagem>
             <p>{info.description}</p>
             <h2 >{info.value} R$</h2>
-            <button>X</button>
+            <button onClick={() => removerProduto(info._id)}>X</button>
         </ContainerAnuncios>
     );
 }
