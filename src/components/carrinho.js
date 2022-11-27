@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
-//import Header from './Header';
 import Header2 from "./Header2";
 
 export function Carrinho() {
@@ -24,7 +23,6 @@ export function Carrinho() {
     carrinho.forEach((element) => {
       soma += parseInt(element.value);
     });
-    console.log(soma);
   }
 
   useEffect(() => {
@@ -33,12 +31,11 @@ export function Carrinho() {
     const promise = axios.get(URLcarrinho, config);
     promise.then((response) => {
       setCarrinho(response.data);
-      console.log(carrinho);
     });
     promise.catch((error) => {
-      console.log(error);
       alert("erro ao acessar carrinho");
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [att]);
 
   function apagarAnuncio() {
@@ -52,11 +49,8 @@ export function Carrinho() {
       const URLdelete = `https://brechofut.onrender.com/meus-anuncios/${element._id}`;
 
       const promise = axios.delete(URLdelete, config);
-      promise.then((response) => {
-        console.log("anuncio removido", response);
-      });
+      promise.then((response) => {});
       promise.catch((error) => {
-        console.log(error);
         alert("erro ao remover produto");
       });
     });
@@ -73,11 +67,8 @@ export function Carrinho() {
       const URLdelete = `https://brechofut.onrender.com/carrinho/${element._id}`;
 
       const promise = axios.delete(URLdelete, config);
-      promise.then((response) => {
-        console.log("carrinho removido", response);
-      });
+      promise.then((response) => {});
       promise.catch((error) => {
-        console.log(error);
         alert("erro ao remover carrinho");
       });
     });
@@ -120,7 +111,6 @@ export function Carrinho() {
               apagarAnuncio();
               navigate("/home");
             } else {
-              console.log("entrei2");
               setRes(0);
               soma = 0;
             }
@@ -149,10 +139,8 @@ function TodosAnuncios(props) {
     const promise = axios.delete(URLdelete, config);
     promise.then((response) => {
       setAtt(!att);
-      console.log("removido", response);
     });
     promise.catch((error) => {
-      console.log(error);
       alert("erro ao remover produto");
     });
   }
@@ -170,7 +158,6 @@ function TodosAnuncios(props) {
   );
 }
 
-//styled components
 const ContainerImagem = styled.div`
   background-color: #67be9b;
   align-items: center;
@@ -226,7 +213,7 @@ const ContainerAnuncios = styled.div`
   align-items: center;
   justify-content: center;
   margin: 15px;
-  margin-bottom: 45px;
+  margin-bottom: 53px;
 
   &:first-child {
     margin-top: 90px;
