@@ -1,7 +1,6 @@
 /*
 
-*****   FINAL VERSION 1.0.1   ***** 
-
+*****   FINAL VERSION 1.0.2   ***** 
 
 *aplicação inicialmente feita para mobile com "width: 375px", 
  porém adaptada e funcional para desktop;
@@ -18,5 +17,5 @@
 *link da aplicação:
     https://projeto15-brechofut-front.vercel.app
 
-
 */
+
