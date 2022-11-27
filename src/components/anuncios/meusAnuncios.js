@@ -30,6 +30,9 @@ export function MeusAnuncios() {
             alert("erro ao acessar anuncios");
         });
     }, [att]);
+
+    console.log(meusAnuncios);
+
     return (
         <>
             < Header2/>
@@ -100,8 +103,9 @@ const ContainerMain = styled.div`
     margin-bottom: 95px;
 
     p {
-    font-size: 17px;
-    color: black;
+    font-size: 20px;
+    margin-top: 200px;
+    color: #fcfcd7;
     font-family: 'Patrick Hand', cursive;
     margin-bottom: 2px;
     letter-spacing: 1px;

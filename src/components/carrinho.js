@@ -9,12 +9,24 @@ import Header2 from './Header2';
 export function Carrinho() {
     const [carrinho, setCarrinho] = useState([]);
     const [att, setAtt] = useState(false);
+    const [res, setRes] = useState(0);
     const { userInformations } = useContext(UserContext);
+    const navigate = useNavigate();
+
 
     const config = {
         headers: {
             Authorization: `Bearer ${userInformations}`
         }
+    }
+
+
+    let soma = 0;
+    function total() {
+        carrinho.forEach((element) => {
+            soma += parseInt(element.value);
+        } )
+        console.log(soma);
     }
 
     useEffect(() => {
@@ -31,16 +43,86 @@ export function Carrinho() {
         });  
     }, [att]);
 
-    
-    
+
+    function apagarAnuncio() {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInformations}`
+            }
+        };
+
+        carrinho.forEach((element) => {
+
+            const URLdelete = `https://brechofut.onrender.com/meus-anuncios/${element._id}`;
+
+            const promise = axios.delete(URLdelete, config);
+            promise.then((response) => {
+                console.log("anuncio removido", response);
+            });
+            promise.catch(error => {
+                console.log(error);
+                alert("erro ao remover produto");
+            });  
+        })
+    }
+
+    function apagarCarrinho() {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInformations}`
+            }
+        };
+
+        carrinho.forEach((element) => {
+
+            const URLdelete = `https://brechofut.onrender.com/carrinho/${element._id}`;
+
+            const promise = axios.delete(URLdelete, config);
+            promise.then((response) => {
+                console.log("carrinho removido", response);
+            });
+            promise.catch(error => {
+                console.log(error);
+                alert("erro ao remover carrinho");
+            });  
+        })
+    }
+
     return (
         <>
             <Header2/>
             <ContainerMain>
-                {carrinho.map(carrinhos => <TodosAnuncios info={carrinhos} key={carrinho.id} setAtt={setAtt} att={att} />).reverse()}
+                {
+                    carrinho.length > 0 ?
+
+                    <>
+                        {carrinho.map(carrinhos => <TodosAnuncios info={carrinhos} key={carrinho.id} setAtt={setAtt} att={att} />).reverse()}
+                    </>
+
+                    :
+
+                    <h4>Seu carrinho está vazio!</h4>
+                }
             </ContainerMain>
             <ContainerButton>
-                <button>finalizar compra</button>
+                <button onClick={() => { 
+                    if (res === 0) {
+                        total();
+                    }
+                    setRes(1);
+                    
+                    if (window.confirm(`Deseja finalizar compra no valor de R$ ${soma}`)) {
+                        alert("Obrigado! Compra confirmada!");
+                        apagarCarrinho();
+                        apagarAnuncio();
+                        navigate("/home")
+                    } else {
+                        console.log("entrei2")
+                        setRes(0);
+                        soma = 0;
+                    }
+
+                }}>finalizar compra</button>
             </ContainerButton>
 
         </>
@@ -190,4 +272,14 @@ const ContainerAnuncios = styled.div`
 
 const ContainerMain = styled.div`
     margin-bottom: 80px;
+
+    h4 {
+    font-size: 20px;
+    margin-top: 240px;
+    color: #fcfcd7;
+    font-family: 'Patrick Hand', cursive;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+    margin-left:90px
+    }
 `;

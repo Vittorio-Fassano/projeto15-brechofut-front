@@ -66,7 +66,11 @@ function TodosAnuncios(props) {
         });
         promise.catch(error => {
             console.log(error);
-            alert("erro ao adicionar no carrinho", error);
+            if(error.response.status === 500) {
+                alert("produto indisponível no momento!")
+            } else {
+                alert("erro ao adicionar no carrinho", error);
+            }
         });
     }
 
