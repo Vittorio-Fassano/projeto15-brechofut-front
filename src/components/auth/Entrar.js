@@ -5,7 +5,7 @@ import axios from 'axios';
 import UserContext from "../../contexts/UserContext";
 
 export function Entrar() {
-    const { setUserInformations, /*setUserName*/} = useContext(UserContext);//get a state through the context
+    const { setUserInformations, setUserName} = useContext(UserContext);//get a state through the context
     const [infosEntrar, setInfosEntrar] = useState({ email: '', password: '' });
     const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ export function Entrar() {
             setUserInformations(response.data.token);
 
             setInfosEntrar(response.data);
+            setUserName(response.data.name);
             
             const user = JSON.stringify(response.data.token);
             localStorage.setItem('token', user)

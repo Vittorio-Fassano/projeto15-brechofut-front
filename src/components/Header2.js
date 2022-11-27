@@ -1,21 +1,19 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useState, useContext } from "react";
-
+import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 
 export default function Header2() {
-    const [header, setHeader] = useState("");
     const { setUserInformations } = useContext(UserContext);
     const navigate = useNavigate();
 
     function logOut() {
-        window.localStorage.removeItem('token');
-        window.localStorage.clear('token');
-        setUserInformations(null);
-        navigate("/");
+            window.localStorage.removeItem('token');
+            window.localStorage.clear('token');
+            setUserInformations(null);
+            navigate("/");
     }
 
     return (

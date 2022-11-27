@@ -1,285 +1,284 @@
-import { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, useContext } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
 //import Header from './Header';
-import Header2 from './Header2';
+import Header2 from "./Header2";
 
 export function Carrinho() {
-    const [carrinho, setCarrinho] = useState([]);
-    const [att, setAtt] = useState(false);
-    const [res, setRes] = useState(0);
-    const { userInformations } = useContext(UserContext);
-    const navigate = useNavigate();
+  const [carrinho, setCarrinho] = useState([]);
+  const [att, setAtt] = useState(false);
+  const [res, setRes] = useState(0);
+  const { userInformations } = useContext(UserContext);
+  const navigate = useNavigate();
 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userInformations}`,
+    },
+  };
 
+  let soma = 0;
+  function total() {
+    carrinho.forEach((element) => {
+      soma += parseInt(element.value);
+    });
+    console.log(soma);
+  }
+
+  useEffect(() => {
+    const URLcarrinho = "https://brechofut.onrender.com/carrinho";
+
+    const promise = axios.get(URLcarrinho, config);
+    promise.then((response) => {
+      setCarrinho(response.data);
+      console.log(carrinho);
+    });
+    promise.catch((error) => {
+      console.log(error);
+      alert("erro ao acessar carrinho");
+    });
+  }, [att]);
+
+  function apagarAnuncio() {
     const config = {
-        headers: {
-            Authorization: `Bearer ${userInformations}`
-        }
-    }
+      headers: {
+        Authorization: `Bearer ${userInformations}`,
+      },
+    };
 
+    carrinho.forEach((element) => {
+      const URLdelete = `https://brechofut.onrender.com/meus-anuncios/${element._id}`;
 
-    let soma = 0;
-    function total() {
-        carrinho.forEach((element) => {
-            soma += parseInt(element.value);
-        } )
-        console.log(soma);
-    }
+      const promise = axios.delete(URLdelete, config);
+      promise.then((response) => {
+        console.log("anuncio removido", response);
+      });
+      promise.catch((error) => {
+        console.log(error);
+        alert("erro ao remover produto");
+      });
+    });
+  }
 
-    useEffect(() => {
-        const URLcarrinho = "https://brechofut.onrender.com/carrinho";
+  function apagarCarrinho() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInformations}`,
+      },
+    };
 
-        const promise = axios.get(URLcarrinho, config);
-        promise.then((response) => {
-            setCarrinho(response.data);
-            console.log(carrinho);
-        });
-        promise.catch(error => {
-            console.log(error);
-            alert("erro ao acessar carrinho");
-        });  
-    }, [att]);
+    carrinho.forEach((element) => {
+      const URLdelete = `https://brechofut.onrender.com/carrinho/${element._id}`;
 
+      const promise = axios.delete(URLdelete, config);
+      promise.then((response) => {
+        console.log("carrinho removido", response);
+      });
+      promise.catch((error) => {
+        console.log(error);
+        alert("erro ao remover carrinho");
+      });
+    });
+  }
 
-    function apagarAnuncio() {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInformations}`
+  return (
+    <>
+      <Header2 />
+      <ContainerMain>
+        {carrinho.length > 0 ? (
+          <>
+            {carrinho
+              .map((carrinhos) => (
+                <TodosAnuncios
+                  info={carrinhos}
+                  key={carrinho.id}
+                  setAtt={setAtt}
+                  att={att}
+                />
+              ))
+              .reverse()}
+          </>
+        ) : (
+          <h4>Seu carrinho está vazio!</h4>
+        )}
+      </ContainerMain>
+      <ContainerButton>
+        <button
+          onClick={() => {
+            if (res === 0) {
+              total();
             }
-        };
+            setRes(1);
 
-        carrinho.forEach((element) => {
-
-            const URLdelete = `https://brechofut.onrender.com/meus-anuncios/${element._id}`;
-
-            const promise = axios.delete(URLdelete, config);
-            promise.then((response) => {
-                console.log("anuncio removido", response);
-            });
-            promise.catch(error => {
-                console.log(error);
-                alert("erro ao remover produto");
-            });  
-        })
-    }
-
-    function apagarCarrinho() {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInformations}`
+            if (
+              window.confirm(`Deseja finalizar compra no valor de R$ ${soma}`)
+            ) {
+              alert("Obrigado! Compra confirmada!");
+              apagarCarrinho();
+              apagarAnuncio();
+              navigate("/home");
+            } else {
+              console.log("entrei2");
+              setRes(0);
+              soma = 0;
             }
-        };
-
-        carrinho.forEach((element) => {
-
-            const URLdelete = `https://brechofut.onrender.com/carrinho/${element._id}`;
-
-            const promise = axios.delete(URLdelete, config);
-            promise.then((response) => {
-                console.log("carrinho removido", response);
-            });
-            promise.catch(error => {
-                console.log(error);
-                alert("erro ao remover carrinho");
-            });  
-        })
-    }
-
-    return (
-        <>
-            <Header2/>
-            <ContainerMain>
-                {
-                    carrinho.length > 0 ?
-
-                    <>
-                        {carrinho.map(carrinhos => <TodosAnuncios info={carrinhos} key={carrinho.id} setAtt={setAtt} att={att} />).reverse()}
-                    </>
-
-                    :
-
-                    <h4>Seu carrinho está vazio!</h4>
-                }
-            </ContainerMain>
-            <ContainerButton>
-                <button onClick={() => { 
-                    if (res === 0) {
-                        total();
-                    }
-                    setRes(1);
-                    
-                    if (window.confirm(`Deseja finalizar compra no valor de R$ ${soma}`)) {
-                        alert("Obrigado! Compra confirmada!");
-                        apagarCarrinho();
-                        apagarAnuncio();
-                        navigate("/home")
-                    } else {
-                        console.log("entrei2")
-                        setRes(0);
-                        soma = 0;
-                    }
-
-                }}>finalizar compra</button>
-            </ContainerButton>
-
-        </>
-    )
+          }}
+        >
+          finalizar compra
+        </button>
+      </ContainerButton>
+    </>
+  );
 }
 
 function TodosAnuncios(props) {
-    const { info, att, setAtt } = props;
-    const { userInformations } = useContext(UserContext);
+  const { info, att, setAtt } = props;
+  const { userInformations } = useContext(UserContext);
 
+  function removerCarrinho(callback) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInformations}`,
+      },
+    };
 
-    function removerCarrinho(callback) {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${userInformations}`
-            }
-        };
+    const URLdelete = `https://brechofut.onrender.com/carrinho/${callback}`;
 
-        const URLdelete = `https://brechofut.onrender.com/carrinho/${callback}`;
+    const promise = axios.delete(URLdelete, config);
+    promise.then((response) => {
+      setAtt(!att);
+      console.log("removido", response);
+    });
+    promise.catch((error) => {
+      console.log(error);
+      alert("erro ao remover produto");
+    });
+  }
 
-        const promise = axios.delete(URLdelete, config);
-        promise.then((response) => {
-            setAtt(!att);
-            console.log("removido", response);
-        });
-        promise.catch(error => {
-            console.log(error);
-            alert("erro ao remover produto");
-        });  
-    }
-
-    return (
-        <ContainerAnuncios>
-            <ContainerImagem>
-                <img src={info.image} alt="fotoProduto" />
-            </ContainerImagem>
-            <p>{info.description}</p>
-            <h2 >{info.value} R$</h2>
-            <h3 >{info.user}</h3>
-            <button onClick={() => removerCarrinho(info._id)}>X</button>
-        </ContainerAnuncios>
-    );
+  return (
+    <ContainerAnuncios>
+      <ContainerImagem>
+        <img src={info.image} alt="fotoProduto" />
+      </ContainerImagem>
+      <p>{info.description}</p>
+      <h2>{info.value} R$</h2>
+      <h3>{info.user}</h3>
+      <button onClick={() => removerCarrinho(info._id)}>X</button>
+    </ContainerAnuncios>
+  );
 }
 
 //styled components
 const ContainerImagem = styled.div`
-    background-color: #67be9b;
-    align-items: center;
-    justify-content: center;
-    display: column;
-    margin-bottom: 3px;
-    margin-left:38px;
-    
+  background-color: #67be9b;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
 
-    img {
-        width: 165px;
-        height:165px;
-        border-radius: 25px;
-        border-style: solid;
-        border-color: #fcfcd7;
-        border-width: 3px;
-        box-shadow: 2px 2px 2px 2px #95d0b8;
-    }
-    
+  img {
+    width: 165px;
+    height: 165px;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: #fcfcd7;
+    border-width: 3px;
+    box-shadow: 2px 2px 2px 2px #95d0b8;
+  }
 `;
 const ContainerButton = styled.div`
-    background-color: #67be9b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #67be9b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  button {
+    width: 100vw;
+    height: 70px;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
     position: fixed;
     bottom: 0;
-    width: 100%;
-
-    button {
-        width: 100vw;
-        height:70px;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        position: fixed;
-        bottom: 0;
-        padding-left:15px;
-        font-size: 20px;
-        border: none;
-        text-align:center;
-        align-items: center;
-        background-color: #f04158;
-        color:#fcfcd7;
-        font-family: 'Patrick Hand', cursive;
-        font-weight: 700; 
-        letter-spacing: 3px;
-        cursor: pointer;
-}
-        
-`
+    padding-left: 15px;
+    font-size: 20px;
+    border: none;
+    text-align: center;
+    align-items: center;
+    background-color: #f04158;
+    color: #fcfcd7;
+    font-family: "Patrick Hand", cursive;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+  }
+`;
 
 const ContainerAnuncios = styled.div`
-    display: flex;
-    flex-direction: column;
-    background-color: #67be9b;
-    align-items: center;
-    justify-content: center;
-    margin: 15px;
-    margin-bottom: 45px;
-    
-    &:first-child{
-        margin-top: 90px;
-    }
-    
-    p {
+  display: flex;
+  flex-direction: column;
+  background-color: #67be9b;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  margin-bottom: 45px;
+
+  &:first-child {
+    margin-top: 90px;
+  }
+
+  p {
     font-size: 17px;
     color: #fcfcd7;
-    font-family: 'Patrick Hand', cursive;
+    font-family: "Patrick Hand", cursive;
     margin-bottom: 2px;
     letter-spacing: 1px;
-    margin-left: 15px;
-    }
+  }
 
-    h2 {
+  h2 {
     font-size: 19px;
     color: #fcfcd7;
-    font-family: 'Patrick Hand', cursive;
-    margin-left: 40px;
+    font-family: "Patrick Hand", cursive;
+
     margin-bottom: 1px;
     letter-spacing: 1px;
-    }
+  }
 
-    h3 {
+  h3 {
     font-size: 17px;
     color: #fcfcd7;
-    font-family: 'Patrick Hand', cursive; 
-    margin-left: 40px;
-    letter-spacing: 1px;
-    }
+    font-family: "Patrick Hand", cursive;
 
-    button {
-        height: 15px;
-        width: 30px;
-        border: none;
-        background-color: #95d0b8;
-        color: #f04158;
-        margin-left: 40px;
-        margin-top: 5px;
-        cursor: pointer;
-    }
+    letter-spacing: 1px;
+  }
+
+  button {
+    height: 15px;
+    width: 30px;
+    border: none;
+    background-color: #95d0b8;
+    color: #f04158;
+
+    margin-top: 5px;
+    cursor: pointer;
+  }
 `;
 
 const ContainerMain = styled.div`
-    margin-bottom: 80px;
+  margin-bottom: 80px;
 
-    h4 {
+  h4 {
     font-size: 20px;
     margin-top: 240px;
     color: #fcfcd7;
-    font-family: 'Patrick Hand', cursive;
+    font-family: "Patrick Hand", cursive;
     margin-bottom: 2px;
     letter-spacing: 1px;
-    margin-left:90px
-    }
+    text-align: center;
+  }
 `;

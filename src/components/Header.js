@@ -11,10 +11,10 @@ export default function Header() {
     const navigate = useNavigate();
 
     function logOut() {
-        window.localStorage.removeItem('token');
-        window.localStorage.clear('token');
-        setUserInformations(null);
-        navigate("/");
+            window.localStorage.removeItem('token');
+            window.localStorage.clear('token');
+            setUserInformations(null);
+            navigate("/");
     }
 
     console.log(header);

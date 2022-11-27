@@ -46,8 +46,9 @@ export function Home() {
 
 function TodosAnuncios(props) {
     const { info } = props;
-    const { userInformations } = useContext(UserContext);
-
+    const { userInformations, userName } = useContext(UserContext);
+    console.log(info);
+    console.log(userName);
     function adicionarCarrinho(callback) {
 
         const config = {
@@ -58,6 +59,10 @@ function TodosAnuncios(props) {
         console.log(callback);
         
         const URLcarrinho = `https://brechofut.onrender.com/carrinho/${callback}`;
+
+        if(info.user === userName) {
+            return alert("Este produto ja é seu!");
+        }
 
         const promise = axios.post(URLcarrinho, {}, config );
         promise.then((response) => {
@@ -89,11 +94,6 @@ function TodosAnuncios(props) {
     );
 }
 
-
-
-
-
-
 const ContainerMain = styled.div`
     background-color: #67be9b ;
     display: flex;
@@ -102,9 +102,12 @@ const ContainerMain = styled.div`
     flex-direction: column;
     margin-top: 65px;
     margin-bottom: 80px;
+    text-align: center;
 `;
 
 const ContainerAnuncios = styled.div`
+    display: flex;
+    flex-direction: column;
     background-color: #67be9b;
     align-items: center;
     justify-content: center;
@@ -116,7 +119,6 @@ const ContainerAnuncios = styled.div`
         border: none;
         background-color: #95d0b8;
         color: #f04158;
-        margin-left: 98px;
         margin-bottom:17px;
         margin-top: 3px;
         cursor: pointer;
@@ -129,28 +131,31 @@ const ContainerAnuncios = styled.div`
     }
     
     p {
+    text-align: center;
     font-size: 17px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive;
     margin-bottom: 2px;
     letter-spacing: 1px;
-    margin-left: 15px;
+    
     }
 
     h2 {
+    text-align: center;
     font-size: 19px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive;
-    margin-left: 90px;
+    
     margin-bottom: 1px;
     letter-spacing: 1px;
     }
 
     h3 {
+    text-align: center;
     font-size: 17px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive; 
-    margin-left: 96px;
+    
     letter-spacing: 1px;
     }
 `;
@@ -159,9 +164,10 @@ const ContainerImagem = styled.div`
     background-color: #67be9b;
     align-items: center;
     justify-content: center;
-    display: column;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 3px;
-    margin-left:38px;
+  
     
 
     img {

@@ -44,7 +44,7 @@ export function MeusAnuncios() {
                 </>
                 :
                 <>
-                    <p>Você ainda não fez nenhum anúncio!</p>
+                    <h4>Você ainda não fez nenhum anúncio!</h4>
                 </>
                 }       
             </ContainerMain>
@@ -102,7 +102,7 @@ const ContainerMain = styled.div`
     margin-top: 65px;
     margin-bottom: 95px;
 
-    p {
+    h4 {
     font-size: 20px;
     margin-top: 200px;
     color: #fcfcd7;
@@ -119,6 +119,8 @@ const ContainerAnuncios = styled.div`
     align-items: center;
     margin-top: 25px;
     margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
 
     button {
         height: 15px;
@@ -126,7 +128,7 @@ const ContainerAnuncios = styled.div`
         border: none;
         background-color: #95d0b8;
         color: #f04158;
-        margin-left: 93px;
+        
         cursor: pointer;
     }
  
@@ -142,7 +144,7 @@ const ContainerAnuncios = styled.div`
     font-size: 19px;
     color: #fcfcd7;
     font-family: 'Patrick Hand', cursive;
-    margin-left: 85px;
+    
     margin-bottom: 1px;
     letter-spacing: 1px;
     }
@@ -154,7 +156,8 @@ const ContainerImagem = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 3px;
-    margin-left:19px;
+    display: flex;
+    flex-direction: column;
 
     img {
         width: 170px;

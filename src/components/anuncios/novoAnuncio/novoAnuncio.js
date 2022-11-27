@@ -48,6 +48,7 @@ export function NovoAnuncio () {
                 <form onSubmit={Entry}>
                     <input
                         type='number'
+                        step="0.01"
                         placeholder='valor'
                         onChange={e => setNovoAnuncio({ ...novoAnuncio, value: e.target.value })}
                         

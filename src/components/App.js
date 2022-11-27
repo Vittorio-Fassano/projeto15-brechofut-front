@@ -12,19 +12,19 @@ import {Carrinho} from './carrinho';
 
 function App() {
     const tokenStorage = JSON.parse(localStorage.getItem('token'));
-    //const nameStorage = JSON.parse(localStorage.getItem('name'));
+    const nameStorage = JSON.parse(localStorage.getItem('name'));
     const [userInformations, setUserInformations] = useState(tokenStorage); 
-    //const [userName, setUserName] = useState(nameStorage);
+    const [userName, setUserName] = useState(nameStorage);
 
 
     useEffect(() => {
         if (tokenStorage) {
             setUserInformations(tokenStorage);
-            //setUserName(nameStorage);
+            setUserName(nameStorage);
         }
     }, []);
 
-    const contextValue = { userInformations, setUserInformations};
+    const contextValue = { userInformations, setUserInformations, userName, setUserName };
 
     return (
             <>
